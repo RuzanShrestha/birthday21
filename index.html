@@ -1,1 +1,544 @@
-<p>Happy Birthday</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Happy 21st Birthday, Anushka</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-top: #ffd6e0;
+            --bg-mid: #ffe5ec;
+            --bg-bottom: #fff0f3;
+            --text-dark: #3d2226;
+            --text-muted: #8a5761;
+            --accent-rose: #ff8fa3;
+            --accent-soft: #ffb3c1;
+            --gold-shimmer: #d4a373;
+            --glass-bg: rgba(255, 255, 255, 0.88);
+            --border-color: rgba(255, 143, 163, 0.65);
+            --shadow-base: 0 20px 60px rgba(214, 140, 158, 0.45);
+        }
+
+        * { 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        body {
+            margin: 0; 
+            padding: 32px 16px 64px 16px;
+            background: linear-gradient(160deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            font-family: 'Caveat', cursive;
+            min-height: 100vh;
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start;
+            overflow-x: hidden;
+        }
+
+        #petal-canvas {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            pointer-events: none; 
+            z-index: 1;
+        }
+
+        .glass-panel {
+            width: 100%; 
+            max-width: 780px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px); 
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 28px;
+            box-shadow: var(--shadow-base), inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+            position: relative; 
+            z-index: 10;
+            padding: 56px 48px 64px 48px;
+            animation: float-in 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* --- Double Romantic Border & Floral Corners --- */
+        .romantic-border {
+            position: absolute;
+            top: 18px; left: 18px; right: 18px; bottom: 18px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 20px;
+            pointer-events: none;
+            z-index: 15;
+        }
+        .romantic-border::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px dashed var(--accent-soft);
+            border-radius: 15px;
+            opacity: 0.85;
+        }
+
+        .corner-flower {
+            position: absolute;
+            font-size: 24px;
+            width: 44px; height: 44px;
+            display: flex; justify-content: center; align-items: center;
+            background: #fff;
+            border: 1px solid var(--accent-soft);
+            border-radius: 50%;
+            box-shadow: 0 6px 15px rgba(229, 179, 190, 0.45);
+            z-index: 16;
+        }
+        .tl { top: -16px; left: -16px; transform: rotate(-15deg); }
+        .tr { top: -16px; right: -16px; transform: rotate(15deg); }
+        .bl { bottom: -16px; left: -16px; transform: rotate(-15deg); }
+        .br { bottom: -16px; right: -16px; transform: rotate(15deg); }
+
+        @keyframes float-in {
+            from { opacity: 0; transform: translateY(35px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* --- Elevated Header Badge --- */
+        .letter-header {
+            text-align: center;
+            margin-bottom: 36px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .chapter-badge {
+            display: inline-block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: rgba(255, 229, 236, 0.7);
+            border: 1px solid var(--accent-soft);
+            padding: 6px 20px;
+            border-radius: 50px;
+            margin-bottom: 12px;
+        }
+
+        .main-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            font-weight: 600;
+            font-style: italic;
+            color: var(--text-dark);
+            margin: 0;
+            line-height: 1.15;
+        }
+
+        .title-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 14px;
+            color: var(--accent-rose);
+            font-size: 1.1rem;
+        }
+        .title-divider::before,
+        .title-divider::after {
+            content: '';
+            height: 1px;
+            width: 70px;
+            background: linear-gradient(90deg, transparent, var(--accent-rose), transparent);
+        }
+
+        /* --- Content Flow & Scrapbook Polaroids --- */
+        .letter-content {
+            position: relative;
+            z-index: 20;
+        }
+
+        .salutation {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+
+        .paragraph {
+            font-size: 1.62rem;
+            line-height: 1.62;
+            color: var(--text-dark);
+            margin: 0 0 24px 0;
+            text-align: left;
+        }
+
+        /* Paired Scrapbook Photo Row */
+        .photo-duo {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin: 34px auto;
+            max-width: 620px;
+            align-items: center;
+        }
+
+        .polaroid {
+            background: #fff;
+            padding: 10px 10px 30px 10px;
+            border-radius: 6px;
+            box-shadow: 0 10px 28px rgba(138, 87, 97, 0.18), 0 2px 6px rgba(0, 0, 0, 0.04);
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        /* Washi Tape Accent on Top of Polaroids */
+        .polaroid::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 75px;
+            height: 20px;
+            background: rgba(255, 179, 193, 0.55);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            z-index: 5;
+        }
+
+        .polaroid.tilt-left { transform: rotate(-2.2deg); }
+        .polaroid.tilt-right { transform: rotate(2.2deg); }
+        .polaroid.tilt-slight-left { transform: rotate(-1.5deg); }
+        .polaroid.tilt-slight-right { transform: rotate(1.8deg); }
+
+        .polaroid:hover {
+            transform: scale(1.04) rotate(0deg) !important;
+            box-shadow: 0 16px 36px rgba(214, 140, 158, 0.35);
+            z-index: 30;
+        }
+
+        .polaroid img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+            border-radius: 3px;
+            background-color: #ffe5ec;
+        }
+
+        .polaroid-caption {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            margin-bottom: -18px;
+        }
+
+        /* Highlight Callout for "Happy Birthday mero Anushka" */
+        .wish-banner {
+            text-align: center;
+            margin: 32px 0;
+            padding: 18px 24px;
+            background: linear-gradient(90deg, rgba(255,229,236,0.2), rgba(255,204,213,0.55), rgba(255,229,236,0.2));
+            border-top: 1px dashed var(--accent-rose);
+            border-bottom: 1px dashed var(--accent-rose);
+            font-size: 1.95rem;
+            font-weight: 700;
+            color: #b5485d;
+        }
+
+        /* Postscript Card */
+        .ps-box {
+            margin-top: 32px;
+            padding: 20px 24px;
+            background: rgba(255, 240, 243, 0.85);
+            border-left: 3px solid var(--accent-rose);
+            border-radius: 0 14px 14px 0;
+            font-size: 1.55rem;
+            line-height: 1.58;
+            color: var(--text-dark);
+        }
+
+        /* Signature & Wax Seal */
+        .signature-block {
+            margin-top: 44px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .signature-text {
+            text-align: right;
+            font-size: 2.15rem;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        .wax-seal {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #ff758f, #c9184a);
+            box-shadow: 0 4px 12px rgba(201, 24, 74, 0.35), inset 0 0 0 3px rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff0f3;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transform: rotate(8deg);
+            flex-shrink: 0;
+        }
+
+        /* Lightbox for clicking photos */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(61, 34, 38, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+        .lightbox.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox-card {
+            background: #fff;
+            padding: 14px 14px 40px 14px;
+            border-radius: 8px;
+            max-width: 90vw;
+            max-height: 85vh;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            transform: scale(0.92);
+            transition: transform 0.3s ease;
+        }
+        .lightbox.open .lightbox-card {
+            transform: scale(1);
+        }
+        .lightbox-card img {
+            max-width: 100%;
+            max-height: 72vh;
+            display: block;
+            border-radius: 4px;
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 650px) {
+            body { padding: 16px 10px 40px 10px; }
+            .glass-panel { padding: 42px 24px 48px 24px; border-radius: 22px; }
+            .romantic-border { top: 10px; left: 10px; right: 10px; bottom: 10px; }
+            .corner-flower { width: 34px; height: 34px; font-size: 18px; }
+            .tl { top: -12px; left: -12px; }
+            .tr { top: -12px; right: -12px; }
+            .bl { bottom: -12px; left: -12px; }
+            .br { bottom: -12px; right: -12px; }
+            .main-title { font-size: 2.05rem; }
+            .paragraph { font-size: 1.48rem; }
+            .photo-duo { grid-template-columns: 1fr; gap: 28px; max-width: 340px; }
+            .wish-banner { font-size: 1.65rem; padding: 14px 16px; }
+            .signature-text { font-size: 1.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="petal-canvas"></canvas>
+
+    <div class="glass-panel">
+        
+        <!-- Romantic Border & Floral Corners -->
+        <div class="romantic-border">
+            <div class="corner-flower tl">🌸</div>
+            <div class="corner-flower tr">🌺</div>
+            <div class="corner-flower bl">🌺</div>
+            <div class="corner-flower br">🌸</div>
+        </div>
+
+        <!-- Elevated Header -->
+        <header class="letter-header">
+            <div class="chapter-badge">November 25</div>
+            <h1 class="main-title">Happy 21st Birthday, My Love</h1>
+            <div class="title-divider">✦</div>
+        </header>
+
+        <!-- Single Scrollable Letter Content -->
+        <main class="letter-content">
+            <div class="salutation">Hey Birthday Princess,</div>
+
+            <p class="paragraph">Happy Birthday my wifey! You are 21 already? Damn youre catching up to me in age now you have to watch out haha. You would be legal to drink in America if you were there. I love you so much.</p>
+
+            <p class="paragraph">I would like to start this letter by reminding you how strong of a woman you are! You are such a role model to me and I always look up to you. You are so so so strong and have been a pillar in my life. No matter how many things go south in life I know you will find a way around it, after ranting to me about it of course. Lets look back at all the growth you have had this year, cause this day is all about YOU my love I love you so much. From countless hours of unpaid placements to working two jobs now to getting tickets to go back to Nepal, my girlfriend is flourishing into a wonderful and strong woman. I know for a fact that no matter how many ups and downs you have in life you will navigate through it very well.</p>
+
+            <!-- Photo Pair 1 & 2 -->
+            <div class="photo-duo">
+                <div class="polaroid tilt-left" onclick="openLightbox('1.jpg')">
+                    <img src="1.jpg" alt="Memory 1">
+                    <div class="polaroid-caption">I</div>
+                </div>
+                <div class="polaroid tilt-right" onclick="openLightbox('2.jpg')">
+                    <img src="2.jpg" alt="Memory 2">
+                    <div class="polaroid-caption">II</div>
+                </div>
+            </div>
+
+            <p class="paragraph">Look at all the new hobbies you started, chess, art and you also have been developing your own old hobbies such as crocheting and reading, ohh so whimsy hehe. I see that you are painting your own life one stroke at a time and it is coming out so well. I love the woman you are and I like you as a person,,if you get the reference haha.</p>
+
+            <p class="paragraph">I am sorry that I cannot be with you at this moment I wish I could make this more special it really hurts me that I cannot. I wish we lived together still so that could buy you some flowers and some pastry so that you can cut it and post it on your story again lol. I love you so much. I remember how much I ran to get that piece of pastry your last birthday. I hope we do not have to spend more of these things apart from eachother and get to be with eachother for the rest of our lives.</p>
+
+            <!-- Photo Pair 3 & 4 -->
+            <div class="photo-duo">
+                <div class="polaroid tilt-slight-right" onclick="openLightbox('3.jpg')">
+                    <img src="3.jpg" alt="Memory 3">
+                    <div class="polaroid-caption">III</div>
+                </div>
+                <div class="polaroid tilt-slight-left" onclick="openLightbox('4.jpg')">
+                    <img src="4.jpg" alt="Memory 4">
+                    <div class="polaroid-caption">IV</div>
+                </div>
+            </div>
+
+            <div class="wish-banner">
+                But despite the distance I will try to close the gap with this little letter of mine! I hope you like it. Happy Birthday mero Anushka I love you so much.
+            </div>
+
+            <p class="paragraph">I cannot wait for me to get there so that we can celebrate your birthday, I hope that it is clear to you that I am coming there for you.. well duh I think it has been pretty clear, I cannot wait to actually make plans for our dates and stuff now and JSYK i count that planning itself as a date too.</p>
+
+            <p class="paragraph">I hope this year makes you even stronger, I cannot wait to accompany you in this journey of life for the rest of my life and watch you grow and grow together. I miss you so so so much mero Anushka. Cannot wait to grow older with you! i see our life ahead and i am very excited for it! I hope you liked my letter.</p>
+
+            <!-- Photo Pair 5 & 6 -->
+            <div class="photo-duo">
+                <div class="polaroid tilt-left" onclick="openLightbox('5.jpg')">
+                    <img src="5.jpg" alt="Memory 5">
+                    <div class="polaroid-caption">V</div>
+                </div>
+                <div class="polaroid tilt-right" onclick="openLightbox('6.jpg')">
+                    <img src="6.jpg" alt="Memory 6">
+                    <div class="polaroid-caption">VI</div>
+                </div>
+            </div>
+
+            <div class="ps-box">
+                P.S. thank you for visiting me i had one of the best dates ever i am not gonna lie. I love you so much i loved going to the beach with you and also i loved meeting you so often. I actually met you four times which was so much and i adore every moment. cannot wait to see you again.
+            </div>
+
+            <div class="signature-block">
+                <div class="signature-text">
+                    Your loving boyfriend,<br>
+                    Ruzan
+                </div>
+                <div class="wax-seal">21</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Lightbox Modal for Enlarging Photos -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-card" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="Enlarged Memory">
+        </div>
+    </div>
+
+    <script>
+        // --- LIGHTBOX FOR PHOTOS ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.add('open');
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // --- FLOATING SAKURA & SPARKLES CANVAS ---
+        const canvas = document.getElementById('petal-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        
+        window.addEventListener('resize', () => { 
+            width = canvas.width = window.innerWidth; 
+            height = canvas.height = window.innerHeight; 
+        });
+
+        const symbols = ['🌸', '✨', '💮'];
+        const spriteCanvases = symbols.map(sym => {
+            const size = 32;
+            const c = document.createElement('canvas');
+            c.width = size;
+            c.height = size;
+            const cCtx = c.getContext('2d');
+            cCtx.font = `${size * 0.68}px serif`;
+            cCtx.textAlign = 'center';
+            cCtx.textBaseline = 'middle';
+            cCtx.fillText(sym, size / 2, size / 2);
+            return c;
+        });
+
+        const particles = [];
+        class Particle {
+            constructor() { 
+                this.reset(); 
+                this.y = Math.random() * height; 
+            }
+            reset() { 
+                this.x = Math.random() * width; 
+                this.y = Math.random() * -height - 20; 
+                this.sprite = spriteCanvases[Math.floor(Math.random() * spriteCanvases.length)];
+                this.scale = Math.random() * 0.5 + 0.4; 
+                this.vs = Math.random() * 0.55 + 0.35; 
+                this.hs = Math.random() * 0.7 - 0.35; 
+                this.spin = Math.random() * 0.018 - 0.009; 
+                this.angle = Math.random() * Math.PI * 2; 
+                this.opacity = Math.random() * 0.55 + 0.2; 
+            }
+            draw() { 
+                ctx.save(); 
+                ctx.translate(this.x, this.y); 
+                ctx.rotate(this.angle); 
+                ctx.globalAlpha = this.opacity; 
+                const d = 32 * this.scale; 
+                ctx.drawImage(this.sprite, -d / 2, -d / 2, d, d); 
+                ctx.restore(); 
+            }
+            update() { 
+                this.y += this.vs; 
+                this.x += this.hs + Math.sin(this.y / 65) * 0.4; 
+                this.angle += this.spin; 
+                if (this.y > height + 20) this.reset(); 
+            }
+        }
+
+        for (let i = 0; i < 48; i++) particles.push(new Particle());
+        
+        function animate() { 
+            ctx.clearRect(0, 0, width, height); 
+            particles.forEach(p => { p.update(); p.draw(); }); 
+            requestAnimationFrame(animate); 
+        }
+        animate();
+    </script>
+</body>
+</html>
